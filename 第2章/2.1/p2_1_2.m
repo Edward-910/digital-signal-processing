@@ -33,21 +33,19 @@ X = x(n3);
 
 % 蝶形运算
 idx = 0:1:2^(m-1);
-X_res = X; % 迭代用数组
-X_rem = [];
-X_reme = [];
 
 % 第con层DFT
 for con = 1:m
     
     % 预处理
+    X_res = []; % 迭代用数组
     N_con = 2^con; % 该层DFT点数
     idx_con = idx(1:N_con/2);
  
     for a = 1:N/N_con 
         
         % 截取第a段
-        X_con = X_res((a - 1) * N_con + 1 :a * N_con);
+        X_con = X((a - 1) * N_con + 1 :a * N_con);
 
         % 偶数部分
         X_eve = X_con(1:N_con/2);
@@ -60,11 +58,10 @@ for con = 1:m
         X_eve_res = X_eve + X_odd;
         X_odd_res = X_eve - X_odd;
         
-        X_rem = [X_rem,X_eve_res,X_odd_res];
+        X_res = [X_res,X_eve_res,X_odd_res];
     end
 
-    X_res = X_rem; % 保存
-    X_rem = []; % 清空
+    X = X_res; % 保存
     
 end
 toc
