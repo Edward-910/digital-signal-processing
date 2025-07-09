@@ -1,2 +1,18 @@
-# digital signal processing
-数字信号处理中内容matlab实现尝试
+# Digital Signal Processing
+数字信号处理课程学习及课程内容matlab实现代码<br>
+
+---
+参考书籍：<br>
+1.《数字信号处理原理及其MATLAB实现（第3版） (Z-Library)》<br>
+2.《MATLAB数字信号处理85个实用案例精讲.入门到进阶》<br>
+
+---
+运行环境：MATLAB R2023b<br>
+
+## 目录
+### 第二章
+2.1：快速傅里叶变换的matlab函数<br>
+**注意**：
+1.y.'表示对矩阵y转置；y'表示对矩阵y共轭转置，不适用于复数矩阵。<br>
+
+2.2：如何经过IFFT得到实数序列<br>
