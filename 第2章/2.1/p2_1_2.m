@@ -28,9 +28,8 @@ n1 = dec2bin(n,m); % 十转二
 n2 = fliplr(n1); % 翻转
 n3 = bin2dec(n2)+1; % 复原索引
 
-for i = 1:N
-    X(i) = x(n3(i));
-end
+% 重新排列
+X = x(n3);
 
 % 蝶形运算
 idx = 0:1:2^(m-1);
