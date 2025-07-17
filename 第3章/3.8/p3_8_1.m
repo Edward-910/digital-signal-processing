@@ -16,6 +16,7 @@ Rs = 40; % 阻带频率
 
 w = 0:0.01:2; % 频点设置
 
+
 %% 处理
 wp = fp*2*pi/fs; % 通带角频率
 ws = fw*2*pi/fs; % 阻带角频率
@@ -38,13 +39,15 @@ Ws2 = fw*2*pi; % 阻带角频率
 [A2,W2] = freqz(bz2,az2,1000,fs); % 巴特沃斯数字滤波器频率响应
 [A3,W3] = freqs(b1,a1); % 巴特沃斯模拟滤波器频率响应
 [A4,W4] = freqs(b2,a2); % 巴特沃斯模拟滤波器频率响应
+
+
 %% 绘图
 plot(W1,20*log10(A1),'r','LineWidth',2); % 方案一
 hold on
 plot(W2,20*log10(A2),'k'); % 方案二
 plot(W3/2/pi,20*log10(A3),'b','LineWidth',2); % 方案一
 plot(W4/2/pi,20*log10(A4),'g'); % 方案二
-title('幅频响应曲线');xlabel('角频率(w/pi)'); ylabel('幅值/dB');
+title('幅频响应曲线');xlabel('频率(Hz)'); ylabel('幅值/dB');
 legend('数字预畸变曲线','数字不预畸变曲线','模拟预畸变曲线','模拟不预畸变曲线');
 grid;
 xlim([0 300]);
