@@ -24,6 +24,7 @@ w = hanning(M)'; % 汉宁窗
 B = fir1(N,Wn,"stop",w); % 滤波器设计
 [A,W] = freqz(B,1,1000,fs); % 幅频响应
 
+
 %% 绘图
 subplot 211
 plot(W,20*log10(A)); % 幅频响应曲线
