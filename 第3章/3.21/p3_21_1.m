@@ -28,6 +28,7 @@ wp = f(1)*2*pi/fs; % 通带角频率
 ws = f(2)*2*pi/fs; % 阻带角频率
 A = [1 0]; % 滤波器幅值矢量
 F = f*2/fs; % 归一化频率
+N = 1000; % 频率响应点数
 
 %% 处理
 % 理想滤波器偏差值矢量
@@ -36,13 +37,23 @@ delta2 = 10^(-Rs/20)/(1-10^(-Rs/20));
 dev = [delta1 delta2];
 
 [n,fo,ao,w] = firpmord(F,A,dev); % 等波纹fir滤波器参数计算
-b = firpm(n,fo,ao,w); % 等波纹fir滤波器设计
 
-[H,W] = freqz(b,1,1000,fs); % 幅频响应
-
+while 1
+    b = firpm(n,fo,ao,w); % 等波纹fir滤波器设计
+    [H,W] = freqz(b,1,N,fs); % 幅频响应
+    df = fs/2/N; % 频率分辨率
+    index_w = ceil(f(2)/df) + 1; % 计算截止频率对应索引
+    db = 20*log10(H); % 计算幅度分贝值
+    delta_H = max(real(db(index_w:end))); % 阻带最小衰减
+    if delta_H < -Rs
+        break;
+    else
+        n = n + 2;
+    end
+end
 
 %% 绘图
-plot(W,20*log10(H)); % 幅频响应曲线
+plot(W,db); % 幅频响应曲线
 title('幅频响应曲线');xlabel('频率(Hz)'); ylabel('幅值/dB');
 grid;
 
